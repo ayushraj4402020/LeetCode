@@ -5,14 +5,14 @@ public:
         if (rem <= 0 || i >= prices.size()) {
             return 0;
         }
-        if (t[i][rem][flag] != -1) {  // Fixed: use t[i][rem][flag] for both check and store
+        if (t[i][rem][flag] != -1) {  
             return t[i][rem][flag];
         }
         // skip
         int skip = solve(prices, i + 1, rem, flag);
         int take = 0;
 
-        
+
         // buy or sell
         if (flag) {  // can buy
             take = -prices[i] + solve(prices, i + 1, rem, 0);
