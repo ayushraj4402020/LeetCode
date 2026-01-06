@@ -11,25 +11,25 @@
  */
 class Solution {
     private:
-    void solve(TreeNode* root,vector<int>& order){
-        if(root==NULL) return ;
+   bool solve(TreeNode* root,long mini,long maxi){
+        if(root==NULL) return true;
+        if(root->val<=mini||root->val>=maxi){
+            return false;
+        }
+        return solve(root->left,mini,root->val)&&solve(root->right,root->val,maxi);
 
-        solve(root->left,order);
-        order.push_back(root->val);
-        solve(root->right,order);
-        return;
     }
 
-bool isStrictlyIncreasing(const vector<int>& v) {
-    return is_sorted(v.begin(), v.end()) &&
-           adjacent_find(v.begin(), v.end()) == v.end();
-}
+// bool isStrictlyIncreasing(const vector<int>& v) {
+//     return is_sorted(v.begin(), v.end()) &&
+//            adjacent_find(v.begin(), v.end()) == v.end();
+// }
 public:
     bool isValidBST(TreeNode* root) {
-      
-        vector<int> order;
-       solve(root,order);
-       return isStrictlyIncreasing(order);
+      if(root==NULL) return true;
+      //  vector<int> order;
+      return solve(root,LONG_MIN,LONG_MAX);
+       //return isStrictlyIncreasing(order)
         
     }
 };
